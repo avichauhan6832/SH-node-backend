@@ -10,19 +10,28 @@ var usersRouter = require('./routes/users');
 var searchRouter = require('./routes/search');
 
 const usersModel = require('./models/users');
+var url;
+if(process.env.NODE_ENV === 'test') {
+  url = 'mongodb://localhost:27017/userProfile-test';
+} else {
+  url = 'mongodb://localhost:27017/userProfile';
+}
+// const url = process.env.NODE_ENV == test ? 'mongodb://localhost:27017/userProfile' : 'mongodb://localhost:27017/userProfile';
+mongoose.connect(url, { useNewUrlParser: true});
 
-const url = 'mongodb://localhost:27017/userProfile';
-const connect = mongoose.connect(url);
 
-connect.then((db) => {
-    console.log("Connected correctly to server");
-}, (err) => { console.log(err); });
+var db = mongoose.connection;
+if(!db) {
+  console.log("Error connectiong db");
+} else {
+  console.log("DB connected!")
+}
+// connect.then((db) => {
+//     console.log("Connected correctly to server");
+// }, (err) => { console.log(err); });
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());

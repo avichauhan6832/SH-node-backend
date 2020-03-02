@@ -18,10 +18,10 @@ userRouter.route('/')
 .post((req, res, next) => {
   req.body.mobileNumber = Number(req.body.mobileNumber);
   req.body.postalCode = Number(req.body.postalCode);
-  console.log(req.body);
+  // console.log(req.body);
   Users.create(req.body)
     .then((user) => {
-        console.log('User Created ', user);
+        console.log('User Created ', user._id);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(user);

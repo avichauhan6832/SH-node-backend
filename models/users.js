@@ -9,10 +9,12 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     firstName : {
         type: String,
+        required: true,
         required: true
     },
     middleName : {
-        type: String
+        type: String,
+        default: ''
     },
     lastName: {
         type: String,
@@ -49,7 +51,8 @@ const userSchema = new Schema({
                 return str.length <= 100;
             },
             message: 'Length Should be less than 100 characters'
-        }
+        },
+        default: ''
     },
     city: {
         type: String,
@@ -58,7 +61,8 @@ const userSchema = new Schema({
                 return str.length <= 25;
             },
             message: 'Length Should be less than 25 characters'
-        }
+        },
+        default: ''
     },
     state: {
         type: String,
@@ -67,28 +71,27 @@ const userSchema = new Schema({
                 return str.length <= 50;
             },
             message: 'Length Should be less than 50 characters'
-        }
+        },
+        default: ''
     },
     postalCode: {
-        type: Number,
-        validate: {
-            validator: function(v) {
-                return !/d{6}/.test(v);
-            },
-            message: '{VALUE} is not a valid 6 digit number!'
-        }
+        type: String,
+        default: "123456"
     },
     education: {
         type: String,
-        enum: ['10th', '12th', 'Graduate', 'Post Graduate']
+        enum: ['10th', '12th', 'Graduate', 'Post Graduate'],
+        default: 'Graduate'
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Not Selected']
+        enum: ['Male', 'Female', 'Not Selected'],
+        default: 'Not Selected'
     },
     occupation: {
         type: String,
-        enum: ['Salaried', 'Self Employed', 'Other']
+        enum: ['Salaried', 'Self Employed', 'Other'],
+        default: 'Other'
     }
 },  {
     timestamps: true
