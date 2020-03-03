@@ -80,8 +80,8 @@ const userSchema = new Schema({
     },
     education: {
         type: String,
-        enum: ['10th', '12th', 'Graduate', 'Post Graduate'],
-        default: 'Graduate'
+        enum: ['10th', '12th', 'Graduate', 'Post Graduate', 'None'],
+        default: 'None'
     },
     gender: {
         type: String,
